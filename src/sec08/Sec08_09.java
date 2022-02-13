@@ -1,7 +1,7 @@
 package sec08;
 
 import java.util.Scanner;
-
+//DFS미로찾기
 public class Sec08_09 {
                     //좌 하 우 상
     static int[] dx = {-1,0,1,0};
