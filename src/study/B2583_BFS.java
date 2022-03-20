@@ -10,7 +10,7 @@ class Point {
     }
 }
 
-public class B2583 {
+public class B2583_BFS {
     static int[][] map;
     static int m,n;
     static int[] dx = {1,-1,0,0};
@@ -41,7 +41,7 @@ public class B2583 {
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        B2583 T = new B2583();
+        B2583_BFS T = new B2583_BFS();
         m = sc.nextInt();
         n = sc.nextInt();
         int k = sc.nextInt();

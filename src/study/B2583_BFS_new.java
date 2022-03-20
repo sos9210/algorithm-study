@@ -8,8 +8,8 @@ class Position{
         this.y = y;
     }
 }
-
-public class B2583_new {
+//BFS
+public class B2583_BFS_new {
     static int[] dx = {0,0,1,-1};
     static int[] dy = {1,-1,0,0};
     static int m,n,k;
@@ -41,7 +41,7 @@ public class B2583_new {
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        B2583_new T = new B2583_new();
+        B2583_BFS_new T = new B2583_BFS_new();
         m = sc.nextInt();
         n = sc.nextInt();
         k = sc.nextInt();
