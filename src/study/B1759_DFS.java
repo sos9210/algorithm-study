@@ -19,7 +19,7 @@ public class B1759_DFS {
     }
 
     static int L,C;
-    static char combi[];
+    static char[] combi;
     static char[] input;
 
     public void solution(int index,int level){
