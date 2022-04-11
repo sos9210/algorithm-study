@@ -2,7 +2,7 @@ package study;
 
 import java.util.Scanner;
 
-public class B2580_bew {
+public class B2580_new {
     static int[][] sudoku = new int[9][9];
 
     public static void DFS(int row,int col){
