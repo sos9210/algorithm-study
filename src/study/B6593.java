@@ -18,7 +18,7 @@ public class B6593 {
     static char[][][] map;
     static boolean[][][] visit;
     static int second = 0;
-    public static void BFS(PointB6593 pointB6593){
+    public static int BFS(PointB6593 pointB6593){
         Queue<PointB6593> q = new LinkedList<>();
         visit[pointB6593.h][pointB6593.x][pointB6593.y] = true;
         q.offer(pointB6593);
@@ -27,8 +27,7 @@ public class B6593 {
             int h = point.h; int x = point.x; int y = point.y;
 
             if(map[h][x][y] == 'E'){
-                System.out.println("Escaped in "+point.second+" minute(s).");
-                System.exit(0);
+                return point.second;
             }
             for (int k = 0; k < 6; k++) {
                 int nextX = x + nx[k];
@@ -42,30 +41,36 @@ public class B6593 {
                 }
             }
         }
+        return 0;
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        L = sc.nextInt();
-        R = sc.nextInt();
-        C = sc.nextInt();
-        if(L == 0 && R == 0 && C == 0) System.exit(0);
-        map = new char[L][R][C];
-        visit = new boolean[L][R][C];
-        int x = 0,y = 0, h = 0;
-        for (int i = 0; i < L; i++) {
-            for (int j = 0; j < R; j++) {
-                String a = sc.next();
-                for (int k = 0; k < C; k++) {
-                    if(String.valueOf(a.charAt(k)).equals("S")){
-                        h = i;
-                        x = j;
-                        y = k;
+        while(true){
+            L = sc.nextInt();
+            R = sc.nextInt();
+            C = sc.nextInt();
+            if(L == 0 && R == 0 && C == 0) {
+                break;
+            }
+            map = new char[L][R][C];
+            visit = new boolean[L][R][C];
+            int x = 0,y = 0, h = 0;
+            for (int i = 0; i < L; i++) {
+                for (int j = 0; j < R; j++) {
+                    String a = sc.next();
+                    for (int k = 0; k < C; k++) {
+                        if(String.valueOf(a.charAt(k)).equals("S")){
+                            h = i;
+                            x = j;
+                            y = k;
+                        }
+                        map[i][j][k] = a.charAt(k);
                     }
-                    map[i][j][k] = a.charAt(k);
                 }
             }
+            int result = BFS(new PointB6593(h,x,y,second));
+            if(result == 0) System.out.println("Trapped!");
+            else System.out.println("Escaped in "+result+" minute(s).");
         }
-        BFS(new PointB6593(h,x,y,second));
-        if(second == 0) System.out.println("Trapped!");
     }
 }
