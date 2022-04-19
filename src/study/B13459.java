@@ -16,8 +16,9 @@ class Position13459 {
 public class B13459 {
     static int N,M,goalX,goalY;
     static char[][] board;
-    static boolean[][] visitRed;
-    static boolean[][] visitBlue;
+//    static boolean[][] visitRed;
+//    static boolean[][] visitBlue;
+    static boolean[][][][] visit;
     //상 하 좌 우
     static int[] nx = {1,-1,0,0};
     static int[] ny = {0,0,-1,1};
@@ -25,12 +26,11 @@ public class B13459 {
         Queue<Position13459> q = new LinkedList<>();
         q.offer(p);
 
-        visitRed[p.redX][p.redY] = true;
-        visitBlue[p.blueX][p.blueY] = true;
-
+        visit[p.redX][p.redY][p.blueX][p.blueY] = true;
         while (!q.isEmpty()){
             Position13459 position = q.poll();
             int count = position.count;
+            if(count > 10) return 0;
             int i = 0;
             while (i < 4) {
                 boolean redflag = false;    //빨간공과 파란공이 모두 멈출때까지
@@ -40,14 +40,11 @@ public class B13459 {
                 int nextRedY = position.redY + ny[i];
                 int nextBlueX = position.blueX + nx[i];
                 int nextBlueY = position.blueY + ny[i];
-/*                if(nextRedX == 4 && nextRedY == 1){
-                    System.out.println("aa");
-                }*/
 
                 int redCnt = 0;
                 int blueCnt = 0;
                 //빨간공이 움직이지못하면 true
-                if(!visitRed[nextRedX][nextRedY] && nextRedX >= 0 && nextRedX < N && nextRedY >= 0 && nextRedY < M)
+                if(nextRedX >= 0 && nextRedX < N && nextRedY >= 0 && nextRedY < M)
                 while(!redflag){
                     //빨간공이 벽을 만나면 그 전 위치까지만 이동
                     if(board[nextRedX][nextRedY] == '#') {
@@ -67,7 +64,7 @@ public class B13459 {
                     }
                 }
                 //파란공이 움직이지못하면 true
-                if(!visitBlue[nextBlueX][nextBlueY] && nextBlueX >= 0 && nextBlueX < N && nextBlueY >= 0 && nextBlueY < M)
+                if(nextBlueX >= 0 && nextBlueX < N && nextBlueY >= 0 && nextBlueY < M)
                 while(!blueflag) {
                     //파란공이 벽을 만나면 그 전 위치까지만 이동
                     if (board[nextBlueX][nextBlueY] == '#') {
@@ -88,7 +85,7 @@ public class B13459 {
                     }
                 }
                 // 이동한 위치가 빨간공과 파란공 겹친다면
-                if(nextRedX == nextBlueX && nextRedY == nextBlueY){
+                if(nextRedX == nextBlueX && nextRedY == nextBlueY && !(nextRedX == goalX && nextRedY == goalY && nextBlueX == goalX && nextBlueY == goalY)){
                     // 빨간공의 이동방향에 파란공이 있었다면 파란공 바로옆에 위치
                     int rx = 0 ,ry = 0;
                     for (int j = 0; j <= redCnt; j++) {
@@ -112,17 +109,15 @@ public class B13459 {
                 }
                 //둘다 움직이지 못하면
                 if(redflag && blueflag) {
-                    if(count > 10) return 0;
                     if(flag == true){
                         return 1;
                     }
                     //방문한적있으면 큐에 넣지 않는다.
-                    if(!visitRed[nextRedX][nextRedY] || ! visitBlue[nextBlueX][nextBlueY]){
+                    if(!visit[nextRedX][nextRedY][nextBlueX][nextBlueY]){
                         Position13459 pos = new Position13459(nextRedX,nextRedY,nextBlueX,nextBlueY,count+1);
                         q.offer(pos);
+                        visit[nextRedX][nextRedY][nextBlueX][nextBlueY] = true;
                     }
-                    visitRed[nextRedX][nextRedY] = true;
-                    visitBlue[nextBlueX][nextBlueY] = true;
                 }
                 ++i;
             }
@@ -134,8 +129,7 @@ public class B13459 {
         N = sc.nextInt();
         M = sc.nextInt();
         board = new char[N][M];
-        visitRed = new boolean[N][M];
-        visitBlue = new boolean[N][M];
+        visit = new boolean[N][M][N][M];
         int redX = 0;
         int redY = 0;
         int blueX = 0;
@@ -158,8 +152,7 @@ public class B13459 {
                 }
             }
         }
-        visitRed[redX][redY] = true;
-        visitBlue[blueX][blueY] = true;
+
         System.out.println(BFS(new Position13459(redX,redY,blueX,blueY,0)));
     }
 }
