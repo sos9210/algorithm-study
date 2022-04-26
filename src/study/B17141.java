@@ -20,16 +20,21 @@ public class B17141 {
     static int[] dy = {1,-1,0,0};
     static Queue<Point17141> q = new LinkedList<>();
     static int min = Integer.MAX_VALUE;
+    static int total = 0;
+    static boolean[][] check;
+
     private static void copy(){
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
+                
                 if(copyMap[i][j] == null) copyMap[i][j] = "";
-                if(map[i][j] == 1)
-                    copyMap[i][j] = "-";
-                else if(!copyMap[i][j].equals("0"))copyMap[i][j] = "";
-
-                if(copyMap[i][j].equals("0")){
+                if(map[i][j] == 1) copyMap[i][j] = "-";
+                else if(map[i][j] == 2 && !check[i][j]) copyMap[i][j] = "";
+                else if(map[i][j] == 2 && check[i][j]){
+                    copyMap[i][j] = "0";
                     q.offer(new Point17141(i,j,0));
+                }else{
+                    copyMap[i][j] = "";
                 }
             }
         }
@@ -50,10 +55,23 @@ public class B17141 {
         }
         return count;
     }
+    private static boolean check() {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if(copyMap[i][j].equals("")) return false;
+            }
+        }
+        ++total;
+        return true;
+    }
     private static void DFS(int x, int count){
         if(count == M){
             copy();
-            min = Math.min(BFS(),min);
+            int bfs = BFS();
+            if(check()){
+                min = Math.min(min,bfs);
+            }
+            copyMap = new String[N][N];
             return;
         }
 
@@ -62,9 +80,9 @@ public class B17141 {
             int ny = i % N;
             if(map[nx][ny] == 1) continue;
             if(map[nx][ny] == 2){
-                copyMap[nx][ny] = "0";
-                DFS(x+1,count+1);
-                copyMap[nx][ny] = "";
+                check[nx][ny] = true;
+                DFS(i+1,count+1);
+                check[nx][ny] = false;
             }
         }
 
@@ -75,6 +93,7 @@ public class B17141 {
         M = sc.nextInt();
         map = new int[N][N];
         copyMap = new String[N][N];
+        check = new boolean[N][N];
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 map[i][j] = sc.nextInt();
@@ -82,7 +101,7 @@ public class B17141 {
         }
 
         DFS(0,0);
-
-        System.out.println(min);
+        if(total == 0 ) System.out.println(-1);
+        else System.out.println(min);
     }
 }
