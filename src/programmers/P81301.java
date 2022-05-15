@@ -1,4 +1,4 @@
-package study;
+package programmers;
 
 public class P81301 {
     public static String stringToInt(String str){

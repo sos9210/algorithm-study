@@ -1,4 +1,4 @@
-package study;
+package programmers;
 
 public class P42862 {
     public static int solution(int n, int[] lost, int[] reserve) {

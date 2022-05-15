@@ -1,4 +1,4 @@
-package study;
+package programmers;
 
 public class P72410 {
     public static String solution (String new_id) {

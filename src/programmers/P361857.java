@@ -1,4 +1,4 @@
-package study;
+package programmers;
 
 import java.util.HashMap;
 import java.util.Map;

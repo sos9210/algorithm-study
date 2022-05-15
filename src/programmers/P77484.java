@@ -1,4 +1,4 @@
-package study;
+package programmers;
 
 public class P77484 {
     public static int[] solution(int[] lottos, int[] win_nums) {

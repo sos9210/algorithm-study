@@ -1,4 +1,4 @@
-package study;
+package programmers;
 
 public class P12977 {
     public static int solution(int[] nums){

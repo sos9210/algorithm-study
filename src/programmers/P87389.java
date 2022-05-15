@@ -1,4 +1,4 @@
-package study;
+package programmers;
 
 public class P87389 {
     public static int solution(int n) {

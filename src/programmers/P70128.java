@@ -1,4 +1,4 @@
-package study;
+package programmers;
 
 public class P70128 {
     public static int solution(int[] a, int[] b){

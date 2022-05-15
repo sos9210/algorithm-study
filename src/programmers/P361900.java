@@ -1,4 +1,4 @@
-package study;
+package programmers;
 
 public class P361900 {
 /*    public static void main(String[] args) {

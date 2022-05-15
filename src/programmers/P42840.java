@@ -1,4 +1,4 @@
-package study;
+package programmers;
 
 public class P42840 {
     public static int[] solution(int[] answers) {

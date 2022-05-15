@@ -1,4 +1,4 @@
-package study;
+package programmers;
 
 public class P67256 {
     public static String solution(int[] numbers, String hand){

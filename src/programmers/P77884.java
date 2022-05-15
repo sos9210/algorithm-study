@@ -1,4 +1,4 @@
-package study;
+package programmers;
 
 public class P77884 {
     public static int solution(int left, int right) {

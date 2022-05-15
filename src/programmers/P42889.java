@@ -1,4 +1,4 @@
-package study;
+package programmers;
 
 import java.util.*;
 //https://velog.io/@yanghl98/프로그래머스-실패율-JAVA자바-2019-카카오-기출

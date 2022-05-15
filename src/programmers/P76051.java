@@ -1,4 +1,4 @@
-package study;
+package programmers;
 
 public class P76051 {
     public static int solution(int[] absolutes, boolean[] signs){
