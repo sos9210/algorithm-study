@@ -15,21 +15,18 @@ public class P77485 {
         }
         Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < queries.length; i++) {
-            if(i == 2){
-                System.out.println();
-            }
             stack.clear();
             int min = Integer.MAX_VALUE;
             int[] query = queries[i];
             //우측
-            for (int j = query[1]-1; j < query[3]; j++) {
+                for (int j = query[1]-1; j < query[3]; j++) {   //y가증가
                 int tmp = board[query[0]-1][j];
                 if(!stack.isEmpty()) board[query[0]-1][j] = stack.pop();
                 stack.push(tmp);
                 min = Math.min(min,tmp);
             }
             //아래
-            for (int j = query[0]; j < query[2]; j++) {
+            for (int j = query[0]; j < query[2]; j++) {     //x가증가
                 int tmp = board[j][query[3]-1];
                 if(!stack.isEmpty()) board[j][query[3]-1] = stack.pop();
                 stack.push(tmp);
@@ -44,8 +41,8 @@ public class P77485 {
             }
             //상단
             for (int j = query[2]-1; j >= query[0]; j--) {
-                int tmp = board[j-1][query[0]-1];
-                if(!stack.isEmpty()) board[j-1][query[0]-1] = stack.pop();
+                int tmp = board[j-1][query[1]-1];
+                if(!stack.isEmpty()) board[j-1][query[1]-1] = stack.pop();
                 stack.push(tmp);
                 min = Math.min(min,tmp);
             }
@@ -55,6 +52,7 @@ public class P77485 {
     }
     public static void main(String[] args) {
         //Arrays.stream(solution(6,6,new int[][]{{2,2,5,4},{3,3,6,6},{5,1,6,3}})).forEach(v -> System.out.print(v + " "));
-        Arrays.stream(solution(100,97,new int[][]{{1,1,100,97}})).forEach(v -> System.out.print(v + " "));
+        Arrays.stream(solution(3,3,new int[][]{{1,1,2,2},{1,2,2,3},{2,1,3,2},{2,2,3,3}})).forEach(v -> System.out.print(v + " "));
+        //Arrays.stream(solution(100,97,new int[][]{{1,1,100,97}})).forEach(v -> System.out.print(v + " "));
     }
 }
