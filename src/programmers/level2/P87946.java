@@ -1,5 +1,7 @@
 package programmers.level2;
 
+//dfs백트래킹 풀이
+//피로도
 public class P87946 {
     static boolean[] visit;
     static int answer = 1;
